@@ -421,6 +421,13 @@ INSERT INTO order_amount_details (order_id, excursion_no, qty) VALUES
 ('ORD018', 'EX029', 2),
 ('ORD046', 'EX019', 4);
 
+SELECT * FROM passenger_details;
+SELECT * FROM cruise_details;
+SELECT * FROM port_details;
+SELECT * FROM excursion_leader_details;
+SELECT * FROM excursion_details;
+SELECT * FROM order_details;
+SELECT * FROM order_amount_details;
 
 -- i) Update the cost for excursions where the port is ‘Copenhagen’
 -- so they are increased by a percentage equivalent to the 4th and 5th characters in your T-Number.
@@ -428,6 +435,10 @@ INSERT INTO order_amount_details (order_id, excursion_no, qty) VALUES
 UPDATE excursion_details
 SET price_per_excursion = price_per_excursion * 1.61
 WHERE port_id = (SELECT port_id FROM port_details WHERE port = 'Copenhagen');
+SELECT excursion_no, excursion, price_per_excursion
+FROM excursion_details
+WHERE port_id = (SELECT port_id FROM port_details WHERE port = 'Copenhagen');
+-- No Results
 
 -- ii) Create a list that shows the orderID, passenger number, and passenger name and passenger cabin.
 -- The headings for the columns should be “Order ID”, “Passenger ID”, “Name of Passenger” and “Cabin”.
@@ -464,7 +475,6 @@ GROUP BY c.cruise_name;
 -- vi) Display the passenger details, excursion details for passengers
 -- whose name starts with the first two letters of your first name
 -- but do not include the last 2 letters of your last name.
-
 SELECT DISTINCT p.passenger_name, p.passenger_id, p.cabin, e.excursion_no, e.excursion_leader_id, e.port_id, e.excursion, e.price_per_excursion
 FROM passenger_details AS p
 JOIN order_details AS o ON p.passenger_id = o.passenger_id
