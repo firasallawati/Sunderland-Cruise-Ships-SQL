@@ -17,7 +17,7 @@ final reference list.*
 
 ### **Task 1 - Normalisation**
 
-##### **Unormalised Data Table:**
+##### **Unnormalised Data Table:**
 
 | Order ID | Passenger | Passenger Name | Cabin | Cruise No | Cruise Name       | Port          | Excursion No. | Excursion      | Qty | Price per excursion | Excursion leader ID | Excursion Leader | Total Cost |
 | -------- | --------- | -------------- | ----- | --------- | ----------------- | ------------- | ------------- | -------------- | --- | ------------------- | ------------------- | ---------------- | ---------- |
@@ -68,8 +68,6 @@ final reference list.*
 
 order_details
 
-
-
 **Table 2:**
 
 | PK                 |                |                     |                     |                  |               |
@@ -86,8 +84,6 @@ order_details
 | P002               | Palaces        | 300                 | E1008               | Jones            | St Petersburg |
 
 excursion_details
-
-
 
 **Table 3:**
 
@@ -106,8 +102,6 @@ excursion_details
 
 order_amount
 
-
-
 ##### **3rd Normal Form**
 
 **Table 1:**
@@ -121,8 +115,6 @@ order_amount
 
 passenger_details
 
-
-
 **Table 2:**
 
 | PK             |                   |
@@ -132,8 +124,6 @@ passenger_details
 | 2121           | Fjords            |
 
 cruise_details
-
-
 
 **Table 3:**
 
@@ -145,8 +135,6 @@ cruise_details
 | O01           | P003              | 1012           |
 
 order_details
-
-
 
 **Table 4:**
 
@@ -161,8 +149,6 @@ order_details
 
 port_details
 
-
-
 **Table 5:**
 
 | PK                       |                  |
@@ -175,8 +161,6 @@ port_details
 | E0101                    | Ham              |
 
 excursion_leader_details
-
-
 
 **Table 6:**
 
@@ -194,8 +178,6 @@ excursion_leader_details
 | P002               | E1008                    | 3            | Palaces        | 300                 |
 
 excursion_details
-
-
 
 **Table 7:**
 
@@ -277,8 +259,6 @@ CREATE TABLE order_amount_details (
     FOREIGN KEY (order_id) REFERENCES order_details(order_id),  
     FOREIGN KEY (excursion_no) REFERENCES excursion_details(excursion_no)  
 );  
-
-
 
 #(Perplexity, 2026)
 
@@ -640,8 +620,6 @@ CREATE TABLE order_amount_details (
 <mark>('ORD018', 'EX029', 2),</mark>
 <mark>('ORD046', 'EX019', 4);</mark>
 
-
-
 ##### **SQL Input:**
 
 **passenger_details Table:**
@@ -678,32 +656,21 @@ CREATE TABLE order_amount_details (
 
 **i)** Update the cost for excursions where the port is ‘Copenhagen’  so they are increased by a percentage equivalent to the 4th and 5th characters in your T-Number.  For example, if your T-Number is T003456 increase the excursion prices by 34%.  
 
-
 UPDATE excursion_details  
 SET price_per_excursion = price_per_excursion * 1.61  
 WHERE port_id = (SELECT port_id FROM port_details WHERE port = 'Copenhagen');  
 
-
-
 ![](task1.png)
 
-
-
 **ii)** Create a list that shows the orderID, passenger number, and passenger name and passenger cabin. The headings for the columns should be “Order ID”, “Passenger ID”, “Name of Passenger” and “Cabin”.  
-
 
 SELECT o.order_id AS "Order ID", p.passenger_id AS "Passenger ID", p.passenger_name AS "Name of Passenger", p.cabin AS "Cabin"  
 FROM order_details AS o  
 JOIN passenger_details AS p ON o.passenger_id = p.passenger_id;  
 
-
-
 ![](task2.png)
 
-
-
 **iii)** Display the passenger details for all passengers going on an excursion in St Petersburg or Oslo.  
-
 
 SELECT DISTINCT p.passenger_id, p.passenger_name, p.cabin  
 FROM passenger_details AS p  
@@ -713,17 +680,9 @@ JOIN excursion_details AS e ON oa.excursion_no = e.excursion_no
 JOIN port_details AS pt ON e.port_id = pt.port_id  
 WHERE pt.port IN ('St Petersburg', 'Oslo');  
 
-
-
-
 ![](task3.png)
 
-
-
 **iv)** Display the order number, passenger name and who has bought more than 4 tickets on the C001 excursion.  
-
-
-
 
 SELECT o.order_id, p.passenger_name, oa.qty, oa.excursion_no  
 FROM passenger_details AS p  
@@ -731,13 +690,9 @@ JOIN order_details AS o ON p.passenger_id = o.passenger_id
 JOIN order_amount_details AS oa ON o.order_id = oa.order_id  
 WHERE oa.excursion_no = 'C001' AND oa.qty > 4;  
 
-
 ![](task4.png)
 
-
-
 **v)** If the last character in the T-Number is equal to 6, produce the SQL to determine how many excursions are booked by cruise name.  
-
 
 SELECT c.cruise_name, COUNT(oa.excursion_no) AS total_excursions_booked  
 FROM cruise_details AS c  
@@ -745,15 +700,9 @@ LEFT JOIN order_details AS o ON c.cruise_no = o.cruise_no
 JOIN order_amount_details AS oa ON o.order_id = oa.order_id  
 GROUP BY c.cruise_name;  
 
-
-
 ![](task5.png)
 
-
-
 **vi)** Display the passenger details, excursion details for passengers whose name starts with the first two letters of your first name but do not include the last 2 letters of your last name.
-
-
 
 SELECT DISTINCT p.passenger_name, p.passenger_id, p.cabin, e.excursion_no, e.excursion_leader_id, e.port_id, e.excursion, e.price_per_excursion  
 FROM passenger_details AS p  
@@ -761,7 +710,6 @@ JOIN order_details AS o ON p.passenger_id = o.passenger_id
 JOIN order_amount_details AS oa ON o.order_id = oa.order_id  
 JOIN excursion_details AS e ON oa.excursion_no = e.excursion_no  
 WHERE p.passenger_name LIKE 'Fi%' AND p.passenger_name NOT LIKE 'ti%';  
-
 
 ![](task6.png)
 
