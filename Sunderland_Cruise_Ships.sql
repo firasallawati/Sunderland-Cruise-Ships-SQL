@@ -421,10 +421,34 @@ INSERT INTO order_amount_details (order_id, excursion_no, qty) VALUES
 ('ORD018', 'EX029', 2),
 ('ORD046', 'EX019', 4);
 
-SELECT * FROM passenger_details;
-SELECT * FROM cruise_details;
-SELECT * FROM port_details;
-SELECT * FROM excursion_leader_details;
-SELECT * FROM excursion_details;
-SELECT * FROM order_details;
-SELECT * FROM order_amount_details;
+
+-- i) Update the cost for excursions where the port is ‘Copenhagen’
+-- so they are increased by a percentage equivalent to the 4th and 5th characters in your T-Number.
+-- For example, if your T-Number is T003456 increase the excursion prices by 34%.
+UPDATE excursion_details
+SET price_per_excursion = price_per_excursion * 1.61
+WHERE port_id = (SELECT port_id FROM port_details WHERE port = 'Copenhagen');
+
+-- ii) Create a list that shows the orderID, passenger number, and passenger name and passenger cabin.
+-- The headings for the columns should be “Order ID”, “Passenger ID”, “Name of Passenger” and “Cabin”.
+SELECT o.order_id AS "Order ID", p.passenger_id AS "Passenger ID", p.passenger_name AS "Name of Passenger", p.cabin AS "Cabin"
+FROM order_details AS o
+JOIN passenger_details AS p ON o.passenger_id = p.passenger_id;
+
+-- iii) Display the passenger details for all passengers going on an excursion in St Petersburg or Oslo.
+SELECT DISTINCT p.passenger_id, p.passenger_name, p.cabin
+FROM passenger_details AS p
+JOIN order_details AS o ON p.passenger_id = o.passenger_id
+JOIN order_amount_details AS oa ON o.order_id = oa.order_id
+JOIN excursion_details AS e ON oa.excursion_no = e.excursion_no
+JOIN port_details AS pt ON e.port_id = pt.port_id
+WHERE pt.port IN ('St Petersburg', 'Oslo');
+-- No Results
+
+-- iv) Display the order number, passenger name and who has bought more than 4 tickets on the C001 excursion
+SELECT o.order_id, p.passenger_name, oa.qty, oa.excursion_no
+FROM passenger_details AS p
+JOIN order_details AS o ON p.passenger_id = o.passenger_id
+JOIN order_amount_details AS oa ON o.order_id = oa.order_id
+WHERE oa.excursion_no = 'C001' AND oa.qty > 4;
+-- No Results
