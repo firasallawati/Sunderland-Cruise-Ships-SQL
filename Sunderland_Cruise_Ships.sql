@@ -42,9 +42,10 @@ CREATE TABLE order_details (
 );
 
 CREATE TABLE order_amount_details (
-    order_id VARCHAR(10) NOT NULL PRIMARY KEY,
-    excursion_no VARCHAR(10) NOT NULL PRIMARY KEY,
+    order_id VARCHAR(10) NOT NULL,
+    excursion_no VARCHAR(10) NOT NULL,
     qty INT NOT NULL,
+    PRIMARY KEY(order_id,excursion_no),
     FOREIGN KEY (order_id) REFERENCES order_details(order_id),
     FOREIGN KEY (excursion_no) REFERENCES excursion_details(excursion_no)
 );
