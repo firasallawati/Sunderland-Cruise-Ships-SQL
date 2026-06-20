@@ -1,5 +1,3 @@
-
-
 | Module Code        | IY455                                   |
 | ------------------ | --------------------------------------- |
 | Group              | A/B                                     |
@@ -15,8 +13,6 @@ final reference list.*
 
  ☒ *Where I have used AI, I have cited and referenced appropriately.*
 
-
-
 1 NF
 
 | PK       |           |                    |       |               |                   |                |
@@ -27,7 +23,7 @@ final reference list.*
 | O01      | P003      | Brown              | 8124  | 1012          | Baltic Highlights | 1050           |
 
 | Composite<br> PK |               |               |                |     |                     |                     |                      |
-| ---------------- | ------------- | ------------- | -------------- | --- | ------------------- | ------------------- | -------------------- |
+[Report.md](Report.md)| ---------------- | ------------- | ------------- | -------------- | --- | ------------------- | ------------------- | -------------------- |
 | Order ID (FK)    | Port          | Excursion No. | Excursion      | Qty | Price per excursion | Excursion leader ID | Excursion<br> Leader |
 | O23              | Copenhagen    | C001          | Little Mermaid | 5   | 200                 | E0001               | Wermter              |
 |                  | Oslo          | O002          | Museums        | 2   | 150                 | E0002               | Smith                |
@@ -38,8 +34,6 @@ final reference list.*
 |                  | Holden        | H002          | Puffins        | 5   | 100                 | E0101               | Ham                  |
 | O01              | Oslo          | O002          | Museums        | 3   | 150                 | E0002               | Smith                |
 |                  | St Petersburg | P002          | Palaces        | 2   | 300                 | E1008               | Jones                |
-
-
 
 2 NF
 
