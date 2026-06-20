@@ -420,3 +420,11 @@ INSERT INTO order_amount_details (order_id, excursion_no, qty) VALUES
 ('ORD032', 'EX041', 4),
 ('ORD018', 'EX029', 2),
 ('ORD046', 'EX019', 4);
+
+SELECT * FROM passenger_details;
+SELECT * FROM cruise_details;
+SELECT * FROM port_details;
+SELECT * FROM excursion_leader_details;
+SELECT * FROM excursion_details;
+SELECT * FROM order_details;
+SELECT * FROM order_amount_details;

@@ -1,6 +1,6 @@
 | Module Code        | IY455                                   |
 | ------------------ | --------------------------------------- |
-| Group              | A/B                                     |
+| Group              | A                                       |
 | Module Title       | Information Systems Analysis and Design |
 | Assessment Type    | Coursework Stage 1                      |
 | Module Tutor Name  | Mustafa Ghashim                         |
@@ -217,3 +217,7 @@ order_amount_details
 ---
 
 ### **Task 2 - Entity Relationship Diagram (ERD)**
+
+![](ERD.PNG)
+
+---
