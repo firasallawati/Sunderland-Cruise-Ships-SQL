@@ -445,10 +445,31 @@ JOIN port_details AS pt ON e.port_id = pt.port_id
 WHERE pt.port IN ('St Petersburg', 'Oslo');
 -- No Results
 
--- iv) Display the order number, passenger name and who has bought more than 4 tickets on the C001 excursion
+-- iv) Display the order number, passenger name and who has bought more than 4 tickets on the C001 excursion.
 SELECT o.order_id, p.passenger_name, oa.qty, oa.excursion_no
 FROM passenger_details AS p
 JOIN order_details AS o ON p.passenger_id = o.passenger_id
 JOIN order_amount_details AS oa ON o.order_id = oa.order_id
 WHERE oa.excursion_no = 'C001' AND oa.qty > 4;
 -- No Results
+
+-- v) If the last character in the T-Number is equal to 6,
+-- produce the SQL to determine how many excursions are booked by cruise name.
+SELECT c.cruise_name, COUNT(oa.excursion_no) AS total_excursions_booked
+FROM cruise_details AS c
+LEFT JOIN order_details AS o ON c.cruise_no = o.cruise_no
+JOIN order_amount_details AS oa ON o.order_id = oa.order_id
+GROUP BY c.cruise_name;
+
+-- vi) Display the passenger details, excursion details for passengers
+-- whose name starts with the first two letters of your first name
+-- but do not include the last 2 letters of your last name.
+
+SELECT DISTINCT p.passenger_name, p.passenger_id, p.cabin, e.excursion_no, e.excursion_leader_id, e.port_id, e.excursion, e.price_per_excursion
+FROM passenger_details AS p
+JOIN order_details AS o ON p.passenger_id = o.passenger_id
+JOIN order_amount_details AS oa ON o.order_id = oa.order_id
+JOIN excursion_details AS e ON oa.excursion_no = e.excursion_no
+WHERE p.passenger_name LIKE 'Fi%' AND p.passenger_name NOT LIKE 'ti%';
+-- No Results
+
