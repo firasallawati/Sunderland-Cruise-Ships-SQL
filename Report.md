@@ -17,6 +17,18 @@ final reference list.*
 
 ### **Task 1 - Normalisation**
 
+---
+
+**What is Normalisation & What Are Its Advantages and Disadvantages?**
+
+Data normalisation is a method of data structuring in relational databases where each fact is be in the most suitable location, resulting in the minimisation of redundancies and prevention of updates, insertions and deletion anomalies. The data are normally organised in various phases such as 1NF, 2NF and 3NF, in which the database design is gradually split into several related tables (Elmasri and Navathe, 2016).
+
+A benefit of database normalisation is that it improves data integrity because the same information is not repeated in many places, so changes only need to be made once. This also enhances the maintainability of the databases and minimises unnecessary storage space, which is helpful especially in case the system has huge amounts of related data (Connolly and Begg, 2002).
+
+On the other hand, highly normalised databases require joining several tables during querying operations, which is a disadvantage that makes such processes complicated and sometimes slow. The high levels of normalisation can also complicate the database design for beginners because understanding the relationships between many smaller tables takes more planning and technical skill (Connolly and Begg, 2002)
+
+
+
 ##### **Unnormalised Data Table:**
 
 | Order ID | Passenger | Passenger Name | Cabin | Cruise No | Cruise Name       | Port          | Excursion No. | Excursion      | Qty | Price per excursion | Excursion leader ID | Excursion Leader | Total Cost |
@@ -313,6 +325,15 @@ CREATE TABLE order_amount_details (
 <mark>('P048', 'Jacob Bell', '2139'),</mark>
 <mark>('P049', 'Zoe Richardson', '1750'),</mark>
 <mark>('P050', 'Poppy Cox', '4733');</mark>
+
+<mark>('P051', 'Fiona Clarke', '3301'),</mark>  
+<mark>('P052', 'Finn Bradley', '4402'),</mark>  
+<mark>('P053', 'Fiona Bennett', '5503'),</mark>  
+<mark>('P054', 'Firas Hassan', '6604'),</mark>  
+<mark>('P055', 'Fiona Morgan', '7705');</mark>
+
+
+
 <mark>INSERT INTO cruise_details (cruise_no, cruise_name) VALUES</mark>
 <mark>(1001, 'Adriatic Jewels A1'),</mark>
 <mark>(1002, 'Caribbean Bliss B1'),</mark>
@@ -364,6 +385,10 @@ CREATE TABLE order_amount_details (
 <mark>(1048, 'Atlantic Voyage V2'),</mark>
 <mark>(1049, 'Baltic Highlights W2'),</mark>
 <mark>(1050, 'Atlantic Voyage X2');</mark>
+
+
+
+
 <mark>INSERT INTO port_details (port_id, port) VALUES</mark>
 <mark>(1, 'Copenhagen'),</mark>
 <mark>(2, 'Oslo'),</mark>
@@ -415,6 +440,8 @@ CREATE TABLE order_amount_details (
 <mark>(48, 'Galway'),</mark>
 <mark>(49, 'Belfast'),</mark>
 <mark>(50, 'Limerick');</mark>
+
+
 <mark>INSERT INTO excursion_leader_details (excursion_leader_id, excursion_leader) VALUES</mark>
 <mark>('L001', 'Kevin Garcia'),</mark>
 <mark>('L002', 'Laura Rivera'),</mark>
@@ -466,6 +493,10 @@ CREATE TABLE order_amount_details (
 <mark>('L048', 'Sam Wilson'),</mark>
 <mark>('L049', 'Fiona Thomas'),</mark>
 <mark>('L050', 'Helen Turner');</mark>
+
+
+
+
 <mark>INSERT INTO excursion_details (excursion_no, excursion_leader_id, port_id, excursion, price_per_excursion) VALUES</mark>
 <mark>('EX001', 'L004', 38, 'City Walking Tour', 300),</mark>
 <mark>('EX002', 'L048', 35, 'Castle Visit', 350),</mark>
@@ -517,6 +548,21 @@ CREATE TABLE order_amount_details (
 <mark>('EX048', 'L014', 46, 'Cheese Farm Tour', 50),</mark>
 <mark>('EX049', 'L022', 14, 'Christmas Market', 60),</mark>
 <mark>('EX050', 'L044', 41, 'Birdwatching Walk', 50);</mark>
+<mark>('EX051', 'L001', 1, 'Copenhagen City Tour', 120.00),</mark>  
+<mark>('EX052', 'L002', 1, 'Tivoli Gardens Visit', 95.00),</mark>  
+<mark>('EX053', 'L003', 1, 'Nyhavn Canal Walk', 75.00),</mark>  
+<mark>('EX054', 'L004', 1, 'Royal Palace Tour', 110.00),</mark>  
+<mark>('EX055', 'L005', 1, 'Little Mermaid Walk', 85.00),</mark>  
+<mark>('EX056', 'L006', 2, 'Oslo Fjord Cruise', 150.00),</mark>  
+<mark>('EX057', 'L007', 2, 'Viking Ship Museum', 80.00),</mark>  
+<mark>('EX058', 'L008', 2, 'Vigeland Sculpture Park', 65.00),</mark>  
+<mark>('EX059', 'L009', 3, 'Hermitage Museum Tour', 200.00),</mark>  
+<mark>('EX060', 'L010', 3, 'St Petersburg Canal Cruise', 175.00),</mark>  
+<mark>('EX061', 'L011', 3, 'Catherine Palace Visit', 190.00),</mark>  
+<mark>('C001', 'L012', 9, 'Barcelona City Highlights', 110.00);</mark>
+
+
+
 <mark>INSERT INTO order_details (order_id, passenger_id, cruise_no) VALUES</mark>
 <mark>('ORD001', 'P017', 1033),</mark>
 <mark>('ORD002', 'P032', 1017),</mark>
@@ -568,6 +614,25 @@ CREATE TABLE order_amount_details (
 <mark>('ORD048', 'P022', 1002),</mark>
 <mark>('ORD049', 'P008', 1017),</mark>
 <mark>('ORD050', 'P012', 1038);</mark>
+
+<mark>('ORD051', 'P001', 1001),</mark>  
+<mark>('ORD052', 'P002', 1002),</mark>  
+<mark>('ORD053', 'P003', 1003),</mark>  
+<mark>('ORD054', 'P004', 1004),</mark>  
+<mark>('ORD055', 'P005', 1005),</mark>  
+<mark>('ORD056', 'P006', 1006),</mark>  
+<mark>('ORD057', 'P007', 1007),</mark>  
+<mark>('ORD058', 'P008', 1008),</mark>  
+<mark>('ORD059', 'P009', 1009),</mark>  
+<mark>('ORD060', 'P010', 1010),</mark>  
+<mark>('ORD061', 'P051', 1011),</mark>  
+<mark>('ORD062', 'P052', 1012),</mark>  
+<mark>('ORD063', 'P053', 1013),</mark>  
+<mark>('ORD064', 'P054', 1014),</mark>  
+<mark>('ORD065', 'P055', 1015);</mark>
+
+
+
 <mark>INSERT INTO order_amount_details (order_id, excursion_no, qty) VALUES</mark>
 <mark>('ORD017', 'EX003', 2),</mark>
 <mark>('ORD039', 'EX028', 6),</mark>
@@ -618,7 +683,22 @@ CREATE TABLE order_amount_details (
 <mark>('ORD041', 'EX018', 9),</mark>
 <mark>('ORD032', 'EX041', 4),</mark>
 <mark>('ORD018', 'EX029', 2),</mark>
-<mark>('ORD046', 'EX019', 4);</mark>
+<mark>('ORD046', 'EX019', 4);</mark> 
+<mark>('ORD051', 'EX056', 2),</mark>  
+<mark>('ORD052', 'EX057', 3),</mark>  
+<mark>('ORD053', 'EX058', 1),</mark>  
+<mark>('ORD054', 'EX059', 2),</mark>  
+<mark>('ORD055', 'EX060', 4),</mark>  
+<mark>('ORD056', 'C001', 5),</mark>  
+<mark>('ORD057', 'C001', 7),</mark> 
+<mark>('ORD058', 'C001', 9),</mark>  
+<mark>('ORD059', 'C001', 6),</mark>  
+<mark>('ORD060', 'C001', 8),</mark>  
+<mark>('ORD061', 'EX001', 2),</mark> 
+<mark>('ORD062', 'EX002', 3),</mark>  
+<mark>('ORD063', 'EX003', 1),</mark>  
+<mark>('ORD064', 'EX004', 4),</mark>  
+<mark>('ORD065', 'EX005', 2);</mark>
 
 ##### **SQL Input:**
 
@@ -660,7 +740,9 @@ UPDATE excursion_details
 SET price_per_excursion = price_per_excursion * 1.61  
 WHERE port_id = (SELECT port_id FROM port_details WHERE port = 'Copenhagen');  
 
-![](task1.png)
+![](NewTask1.png)
+
+
 
 **ii)** Create a list that shows the orderID, passenger number, and passenger name and passenger cabin. The headings for the columns should be “Order ID”, “Passenger ID”, “Name of Passenger” and “Cabin”.  
 
@@ -668,7 +750,9 @@ SELECT o.order_id AS "Order ID", p.passenger_id AS "Passenger ID", p.passenger_n
 FROM order_details AS o  
 JOIN passenger_details AS p ON o.passenger_id = p.passenger_id;  
 
-![](task2.png)
+![](NewTask2.png)
+
+
 
 **iii)** Display the passenger details for all passengers going on an excursion in St Petersburg or Oslo.  
 
@@ -680,7 +764,9 @@ JOIN excursion_details AS e ON oa.excursion_no = e.excursion_no
 JOIN port_details AS pt ON e.port_id = pt.port_id  
 WHERE pt.port IN ('St Petersburg', 'Oslo');  
 
-![](task3.png)
+![](NewTask3.png)
+
+
 
 **iv)** Display the order number, passenger name and who has bought more than 4 tickets on the C001 excursion.  
 
@@ -690,7 +776,9 @@ JOIN order_details AS o ON p.passenger_id = o.passenger_id
 JOIN order_amount_details AS oa ON o.order_id = oa.order_id  
 WHERE oa.excursion_no = 'C001' AND oa.qty > 4;  
 
-![](task4.png)
+![](NewTask4.png)
+
+
 
 **v)** If the last character in the T-Number is equal to 6, produce the SQL to determine how many excursions are booked by cruise name.  
 
@@ -700,7 +788,9 @@ LEFT JOIN order_details AS o ON c.cruise_no = o.cruise_no
 JOIN order_amount_details AS oa ON o.order_id = oa.order_id  
 GROUP BY c.cruise_name;  
 
-![](task5.png)
+![](NewTask5.png)
+
+
 
 **vi)** Display the passenger details, excursion details for passengers whose name starts with the first two letters of your first name but do not include the last 2 letters of your last name.
 
@@ -711,21 +801,18 @@ JOIN order_amount_details AS oa ON o.order_id = oa.order_id
 JOIN excursion_details AS e ON oa.excursion_no = e.excursion_no  
 WHERE p.passenger_name LIKE 'Fi%' AND p.passenger_name NOT LIKE 'ti%';  
 
-![](task6.png)
+
+
+![](NewTask6.png)
 
 ---
 
 ### **References:**
 
-Perplexity(2026)*OpenA*I(June 20 version)[Large language model]
-Prompt: "I am working on a database system implementation model as follows:
-port_details (port ID PK, port)
-excursion_leader_details (excursion leader ID PK, excursion leader)
-cruise_details (cruise No PK, cruise name)
-passenger_details (passenger ID PK, passenger name, cabin)
-excursion_details (excursion No PK, excursion leader ID FK, port ID FK, excursion, price per excursion)
-order_details (order ID PK, passenger ID FK, cruise No FK)
-order_amount_details (excursion No PK/FK, order ID PK/FK, qty)
-Please create a data set for me of 50 records for each table, make sure that some tables are related using FK in order to not mess the data up."
+Connolly, T.M. and Begg, C.E. (2002). *Database systems: a practical approach to design, implementation, and management* [online]. 3rd ed. Retrieved from: [Database systems : a practical approach to design, implementation, and management : Connolly, Thomas M : Free Download, Borrow, and Streaming : Internet Archive](https://archive.org/details/databasesystemsp00conn/page/n4/mode/1up "https://archive.org/details/databasesystemsp00conn/page/n4/mode/1up") [Accessed 22 June 2026].
+
+Elmasri, R. and Navathe, S.B. (2016). *Fundamentals of Database Systems* [online]. 7th ed. Retrieved from: [Fundamentals of Database Systems, 7th Edition. &middot; GCTU Repository](https://repository.gctu.edu.gh/items/show/1149 "https://repository.gctu.edu.gh/items/show/1149") [Accessed 22 June 2026].
+
+Perplexity(2026)*OpenA*I(June 20 version)[Large language model] Prompt: "I am working on a database system implementation model as follows: port_details (port ID PK, port) excursion_leader_details (excursion leader ID PK, excursion leader) cruise_details (cruise No PK, cruise name) passenger_details (passenger ID PK, passenger name, cabin) excursion_details (excursion No PK, excursion leader ID FK, port ID FK, excursion, price per excursion) order_details (order ID PK, passenger ID FK, cruise No FK) order_amount_details (excursion No PK/FK, order ID PK/FK, qty) Please create a data set for me of 50 records for each table, make sure that some tables are related using FK in order to not mess the data up."
 
 ---

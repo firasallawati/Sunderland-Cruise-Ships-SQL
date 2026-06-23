@@ -101,7 +101,12 @@ INSERT INTO passenger_details (passenger_id, passenger_name, cabin) VALUES
 ('P047', 'Fatima Rivera', '4150'),
 ('P048', 'Jacob Bell', '2139'),
 ('P049', 'Zoe Richardson', '1750'),
-('P050', 'Poppy Cox', '4733');
+('P050', 'Poppy Cox', '4733'),
+('P051', 'Fiona Clarke', '3301'),
+('P052', 'Finn Bradley', '4402'),
+('P053', 'Fiona Bennett', '5503'),
+('P054', 'Firas Hassan', '6604'),
+('P055', 'Fiona Morgan', '7705');
 
 
 INSERT INTO cruise_details (cruise_no, cruise_name) VALUES
@@ -313,7 +318,19 @@ INSERT INTO excursion_details (excursion_no, excursion_leader_id, port_id, excur
 ('EX047', 'L019', 39, 'Tulip Field Visit', 40),
 ('EX048', 'L014', 46, 'Cheese Farm Tour', 50),
 ('EX049', 'L022', 14, 'Christmas Market', 60),
-('EX050', 'L044', 41, 'Birdwatching Walk', 50);
+('EX050', 'L044', 41, 'Birdwatching Walk', 50),
+('EX051', 'L001', 1, 'Copenhagen City Tour', 120.00),
+('EX052', 'L002', 1, 'Tivoli Gardens Visit', 95.00),
+('EX053', 'L003', 1, 'Nyhavn Canal Walk', 75.00),
+('EX054', 'L004', 1, 'Royal Palace Tour', 110.00),
+('EX055', 'L005', 1, 'Little Mermaid Walk', 85.00),
+('EX056', 'L006', 2, 'Oslo Fjord Cruise', 150.00),
+('EX057', 'L007', 2, 'Viking Ship Museum', 80.00),
+('EX058', 'L008', 2, 'Vigeland Sculpture Park', 65.00),
+('EX059', 'L009', 3, 'Hermitage Museum Tour', 200.00),
+('EX060', 'L010', 3, 'St Petersburg Canal Cruise', 175.00),
+('EX061', 'L011', 3, 'Catherine Palace Visit', 190.00),
+('C001', 'L012', 9, 'Barcelona City Highlights', 110.00);
 
 
 INSERT INTO order_details (order_id, passenger_id, cruise_no) VALUES
@@ -366,7 +383,22 @@ INSERT INTO order_details (order_id, passenger_id, cruise_no) VALUES
 ('ORD047', 'P044', 1035),
 ('ORD048', 'P022', 1002),
 ('ORD049', 'P008', 1017),
-('ORD050', 'P012', 1038);
+('ORD050', 'P012', 1038),
+('ORD051', 'P001', 1001),
+('ORD052', 'P002', 1002),
+('ORD053', 'P003', 1003),
+('ORD054', 'P004', 1004),
+('ORD055', 'P005', 1005),
+('ORD056', 'P006', 1006),
+('ORD057', 'P007', 1007),
+('ORD058', 'P008', 1008),
+('ORD059', 'P009', 1009),
+('ORD060', 'P010', 1010),
+('ORD061', 'P051', 1011),
+('ORD062', 'P052', 1012),
+('ORD063', 'P053', 1013),
+('ORD064', 'P054', 1014),
+('ORD065', 'P055', 1015);
 
 
 INSERT INTO order_amount_details (order_id, excursion_no, qty) VALUES
@@ -419,7 +451,22 @@ INSERT INTO order_amount_details (order_id, excursion_no, qty) VALUES
 ('ORD041', 'EX018', 9),
 ('ORD032', 'EX041', 4),
 ('ORD018', 'EX029', 2),
-('ORD046', 'EX019', 4);
+('ORD046', 'EX019', 4),
+('ORD051', 'EX056', 2),
+('ORD052', 'EX057', 3),
+('ORD053', 'EX058', 1),
+('ORD054', 'EX059', 2),
+('ORD055', 'EX060', 4),
+('ORD056', 'C001', 5),
+('ORD057', 'C001', 7),
+('ORD058', 'C001', 9),
+('ORD059', 'C001', 6),
+('ORD060', 'C001', 8),
+('ORD061', 'EX001', 2),
+('ORD062', 'EX002', 3),
+('ORD063', 'EX003', 1),
+('ORD064', 'EX004', 4),
+('ORD065', 'EX005', 2);
 
 SELECT * FROM passenger_details;
 SELECT * FROM cruise_details;
@@ -438,7 +485,7 @@ WHERE port_id = (SELECT port_id FROM port_details WHERE port = 'Copenhagen');
 SELECT excursion_no, excursion, price_per_excursion
 FROM excursion_details
 WHERE port_id = (SELECT port_id FROM port_details WHERE port = 'Copenhagen');
--- No Results
+
 
 -- ii) Create a list that shows the orderID, passenger number, and passenger name and passenger cabin.
 -- The headings for the columns should be “Order ID”, “Passenger ID”, “Name of Passenger” and “Cabin”.
@@ -454,7 +501,7 @@ JOIN order_amount_details AS oa ON o.order_id = oa.order_id
 JOIN excursion_details AS e ON oa.excursion_no = e.excursion_no
 JOIN port_details AS pt ON e.port_id = pt.port_id
 WHERE pt.port IN ('St Petersburg', 'Oslo');
--- No Results
+
 
 -- iv) Display the order number, passenger name and who has bought more than 4 tickets on the C001 excursion.
 SELECT o.order_id, p.passenger_name, oa.qty, oa.excursion_no
@@ -462,7 +509,7 @@ FROM passenger_details AS p
 JOIN order_details AS o ON p.passenger_id = o.passenger_id
 JOIN order_amount_details AS oa ON o.order_id = oa.order_id
 WHERE oa.excursion_no = 'C001' AND oa.qty > 4;
--- No Results
+
 
 -- v) If the last character in the T-Number is equal to 6,
 -- produce the SQL to determine how many excursions are booked by cruise name.
@@ -481,5 +528,3 @@ JOIN order_details AS o ON p.passenger_id = o.passenger_id
 JOIN order_amount_details AS oa ON o.order_id = oa.order_id
 JOIN excursion_details AS e ON oa.excursion_no = e.excursion_no
 WHERE p.passenger_name LIKE 'Fi%' AND p.passenger_name NOT LIKE 'ti%';
--- No Results
-
