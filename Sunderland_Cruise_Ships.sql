@@ -2,56 +2,56 @@ CREATE DATABASE sunderland_cruise_ships;
 
 USE sunderland_cruise_ships;
 
-CREATE TABLE passenger_details (
-    passenger_id VARCHAR(10) NOT NULL PRIMARY KEY,
+CREATE TABLE passenger_details ( # Creates passenger_details Table
+    passenger_id VARCHAR(10) NOT NULL PRIMARY KEY, # Identifies Attribute As Primary Key
     passenger_name VARCHAR(50) NOT NULL,
     cabin VARCHAR(25) NOT NULL
 );
 
-CREATE TABLE cruise_details (
-    cruise_no INT NOT NULL PRIMARY KEY,
+CREATE TABLE cruise_details ( # Creates cruise_details Table
+    cruise_no INT NOT NULL PRIMARY KEY, # Identifies Attribute As Primary Key
     cruise_name VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE port_details (
-    port_id INT NOT NULL PRIMARY KEY,
+CREATE TABLE port_details ( # Creates port_details Table
+    port_id INT NOT NULL PRIMARY KEY, # Identifies Attribute As Primary Key
     port VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE excursion_leader_details (
-    excursion_leader_id VARCHAR(10) NOT NULL PRIMARY KEY,
+CREATE TABLE excursion_leader_details ( # Creates excursion_leader_details Table
+    excursion_leader_id VARCHAR(10) NOT NULL PRIMARY KEY, # Identifies Attribute As Primary Key
     excursion_leader VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE excursion_details (
-    excursion_no VARCHAR(10) NOT NULL PRIMARY KEY,
+CREATE TABLE excursion_details ( # Creates excursion_details Table
+    excursion_no VARCHAR(10) NOT NULL PRIMARY KEY, # Identifies Attribute As Primary Key
     excursion_leader_id VARCHAR(10) NOT NULL,
     port_id INT NOT NULL,
     excursion VARCHAR(50) NOT NULL,
     price_per_excursion DECIMAL(8,2) NOT NULL,
-    FOREIGN KEY (excursion_leader_id) REFERENCES excursion_leader_details(excursion_leader_id),
-    FOREIGN KEY (port_id) REFERENCES port_details(port_id)
+    FOREIGN KEY (excursion_leader_id) REFERENCES excursion_leader_details(excursion_leader_id), # Identifies Attribute As Foreign Key
+    FOREIGN KEY (port_id) REFERENCES port_details(port_id) # Identifies Attribute As Foreign Key
 );
 
-CREATE TABLE order_details (
-    order_id VARCHAR(10) NOT NULL PRIMARY KEY,
+CREATE TABLE order_details ( # Creates order_details Table
+    order_id VARCHAR(10) NOT NULL PRIMARY KEY, # Identifies Attribute As Primary Key
     passenger_id VARCHAR(10) NOT NULL,
     cruise_no INT NOT NULL,
-    FOREIGN KEY (passenger_id) REFERENCES passenger_details(passenger_id),
-    FOREIGN KEY (cruise_no) REFERENCES cruise_details(cruise_no)
+    FOREIGN KEY (passenger_id) REFERENCES passenger_details(passenger_id), # Identifies Attribute As Foreign Key
+    FOREIGN KEY (cruise_no) REFERENCES cruise_details(cruise_no) # Identifies Attribute As Foreign Key
 );
 
-CREATE TABLE order_amount_details (
+CREATE TABLE order_amount_details ( # Creates order_amount_details Table
     order_id VARCHAR(10) NOT NULL,
     excursion_no VARCHAR(10) NOT NULL,
     qty INT NOT NULL,
     PRIMARY KEY(order_id,excursion_no),
-    FOREIGN KEY (order_id) REFERENCES order_details(order_id),
-    FOREIGN KEY (excursion_no) REFERENCES excursion_details(excursion_no)
+    FOREIGN KEY (order_id) REFERENCES order_details(order_id), # Identifies Attribute As Foreign Key
+    FOREIGN KEY (excursion_no) REFERENCES excursion_details(excursion_no) # Identifies Attribute As Foreign Key
 );
 
 
-INSERT INTO passenger_details (passenger_id, passenger_name, cabin) VALUES
+INSERT INTO passenger_details (passenger_id, passenger_name, cabin) VALUES # Inserts Values Into passenger_details Table
 ('P001', 'Laila Allen', '2824'),
 ('P002', 'Jack Harris', '1409'),
 ('P003', 'Charlie Nelson', '5506'),
@@ -109,7 +109,7 @@ INSERT INTO passenger_details (passenger_id, passenger_name, cabin) VALUES
 ('P055', 'Fiona Morgan', '7705');
 
 
-INSERT INTO cruise_details (cruise_no, cruise_name) VALUES
+INSERT INTO cruise_details (cruise_no, cruise_name) VALUES # Inserts Values Into cruise_details Table
 (1001, 'Adriatic Jewels A1'),
 (1002, 'Caribbean Bliss B1'),
 (1003, 'Fjords Explorer C1'),
@@ -162,7 +162,7 @@ INSERT INTO cruise_details (cruise_no, cruise_name) VALUES
 (1050, 'Atlantic Voyage X2');
 
 
-INSERT INTO port_details (port_id, port) VALUES
+INSERT INTO port_details (port_id, port) VALUES # Inserts Values Into port_details Table
 (1, 'Copenhagen'),
 (2, 'Oslo'),
 (3, 'St Petersburg'),
@@ -215,7 +215,7 @@ INSERT INTO port_details (port_id, port) VALUES
 (50, 'Limerick');
 
 
-INSERT INTO excursion_leader_details (excursion_leader_id, excursion_leader) VALUES
+INSERT INTO excursion_leader_details (excursion_leader_id, excursion_leader) VALUES # Inserts Values Into excursion_leader_details Table
 ('L001', 'Kevin Garcia'),
 ('L002', 'Laura Rivera'),
 ('L003', 'Donna Jones'),
@@ -268,7 +268,7 @@ INSERT INTO excursion_leader_details (excursion_leader_id, excursion_leader) VAL
 ('L050', 'Helen Turner');
 
 
-INSERT INTO excursion_details (excursion_no, excursion_leader_id, port_id, excursion, price_per_excursion) VALUES
+INSERT INTO excursion_details (excursion_no, excursion_leader_id, port_id, excursion, price_per_excursion) VALUES # Inserts Values Into excursion_details Table
 ('EX001', 'L004', 38, 'City Walking Tour', 300),
 ('EX002', 'L048', 35, 'Castle Visit', 350),
 ('EX003', 'L004', 48, 'Wine Tasting', 30),
@@ -333,7 +333,7 @@ INSERT INTO excursion_details (excursion_no, excursion_leader_id, port_id, excur
 ('C001', 'L012', 9, 'Barcelona City Highlights', 110.00);
 
 
-INSERT INTO order_details (order_id, passenger_id, cruise_no) VALUES
+INSERT INTO order_details (order_id, passenger_id, cruise_no) VALUES # Inserts Values Into order_details Table
 ('ORD001', 'P017', 1033),
 ('ORD002', 'P032', 1017),
 ('ORD003', 'P004', 1006),
@@ -401,7 +401,7 @@ INSERT INTO order_details (order_id, passenger_id, cruise_no) VALUES
 ('ORD065', 'P055', 1015);
 
 
-INSERT INTO order_amount_details (order_id, excursion_no, qty) VALUES
+INSERT INTO order_amount_details (order_id, excursion_no, qty) VALUES # Inserts Values Into order_amount_details Table
 ('ORD017', 'EX003', 2),
 ('ORD039', 'EX028', 6),
 ('ORD047', 'EX021', 7),
