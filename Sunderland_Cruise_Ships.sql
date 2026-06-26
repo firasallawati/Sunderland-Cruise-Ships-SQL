@@ -4,8 +4,7 @@ USE sunderland_cruise_ships;
 
 CREATE TABLE passenger_details ( # Creates passenger_details Table
     passenger_id VARCHAR(10) NOT NULL PRIMARY KEY, # Identifies Attribute As Primary Key
-    passenger_name VARCHAR(50) NOT NULL,
-    cabin VARCHAR(25) NOT NULL
+    passenger_name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE cruise_details ( # Creates cruise_details Table
@@ -37,6 +36,7 @@ CREATE TABLE order_details ( # Creates order_details Table
     order_id VARCHAR(10) NOT NULL PRIMARY KEY, # Identifies Attribute As Primary Key
     passenger_id VARCHAR(10) NOT NULL,
     cruise_no INT NOT NULL,
+    cabin VARCHAR(25) NOT NULL,
     FOREIGN KEY (passenger_id) REFERENCES passenger_details(passenger_id), # Identifies Attribute As Foreign Key
     FOREIGN KEY (cruise_no) REFERENCES cruise_details(cruise_no) # Identifies Attribute As Foreign Key
 );
@@ -51,62 +51,62 @@ CREATE TABLE order_amount_details ( # Creates order_amount_details Table
 );
 
 
-INSERT INTO passenger_details (passenger_id, passenger_name, cabin) VALUES # Inserts Values Into passenger_details Table
-('P001', 'Laila Allen', '2824'),
-('P002', 'Jack Harris', '1409'),
-('P003', 'Charlie Nelson', '5506'),
-('P004', 'Poppy Turner', '5012'),
-('P005', 'Muhammad Hall', '4657'),
-('P006', 'Sophia Hall', '3286'),
-('P007', 'Mason White', '2679'),
-('P008', 'Sara Young', '9935'),
-('P009', 'Omar Bell', '2424'),
-('P010', 'Ali Jones', '7912'),
-('P011', 'Violet Reed', '1520'),
-('P012', 'Sophia Edwards', '1488'),
-('P013', 'Yusuf Martin', '2535'),
-('P014', 'Sophia Turner', '4582'),
-('P015', 'Logan Young', '4811'),
-('P016', 'Muhammad Murphy', '9279'),
-('P017', 'Layla Harris', '1434'),
-('P018', 'Fatima Scott', '4257'),
-('P019', 'Laila Cox', '9928'),
-('P020', 'George Harris', '7873'),
-('P021', 'Harry Scott', '4611'),
-('P022', 'Aiden Young', '8359'),
-('P023', 'Noah White', '5557'),
-('P024', 'Nora Bailey', '1106'),
-('P025', 'Liam White', '3615'),
-('P026', 'Ali Campbell', '7924'),
-('P027', 'Aiden Cook', '6574'),
-('P028', 'Nathan Taylor', '5552'),
-('P029', 'Mia Wilson', '3547'),
-('P030', 'Isabella Cooper', '4527'),
-('P031', 'Layla Edwards', '6514'),
-('P032', 'Mia Cooper', '2674'),
-('P033', 'Leah Perez', '2519'),
-('P034', 'Leah Carter', '7224'),
-('P035', 'Lucas Harris', '2584'),
-('P036', 'Alfie Parker', '6881'),
-('P037', 'Ava Garcia', '6635'),
-('P038', 'Tariq Brown', '5333'),
-('P039', 'Jacob Taylor', '1711'),
-('P040', 'Muhammad Anderson', '8527'),
-('P041', 'Fatima Perez', '9785'),
-('P042', 'Violet Jones', '3045'),
-('P043', 'Logan Nelson', '7201'),
-('P044', 'Violet Turner', '2291'),
-('P045', 'Chloe Thompson', '5803'),
-('P046', 'Layla Smith', '6925'),
-('P047', 'Fatima Rivera', '4150'),
-('P048', 'Jacob Bell', '2139'),
-('P049', 'Zoe Richardson', '1750'),
-('P050', 'Poppy Cox', '4733'),
-('P051', 'Fiona Clarke', '3301'),
-('P052', 'Finn Bradley', '4402'),
-('P053', 'Fiona Bennett', '5503'),
-('P054', 'Firas Hassan', '6604'),
-('P055', 'Fiona Morgan', '7705');
+INSERT INTO passenger_details (passenger_id, passenger_name) VALUES
+('P001', 'Laila Allen'),
+('P002', 'Jack Harris'),
+('P003', 'Charlie Nelson'),
+('P004', 'Poppy Turner'),
+('P005', 'Muhammad Hall'),
+('P006', 'Sophia Hall'),
+('P007', 'Mason White'),
+('P008', 'Sara Young'),
+('P009', 'Omar Bell'),
+('P010', 'Ali Jones'),
+('P011', 'Violet Reed'),
+('P012', 'Sophia Edwards'),
+('P013', 'Yusuf Martin'),
+('P014', 'Sophia Turner'),
+('P015', 'Logan Young'),
+('P016', 'Muhammad Murphy'),
+('P017', 'Layla Harris'),
+('P018', 'Fatima Scott'),
+('P019', 'Laila Cox'),
+('P020', 'George Harris'),
+('P021', 'Harry Scott'),
+('P022', 'Aiden Young'),
+('P023', 'Noah White'),
+('P024', 'Nora Bailey'),
+('P025', 'Liam White'),
+('P026', 'Ali Campbell'),
+('P027', 'Aiden Cook'),
+('P028', 'Nathan Taylor'),
+('P029', 'Mia Wilson'),
+('P030', 'Isabella Cooper'),
+('P031', 'Layla Edwards'),
+('P032', 'Mia Cooper'),
+('P033', 'Leah Perez'),
+('P034', 'Leah Carter'),
+('P035', 'Lucas Harris'),
+('P036', 'Alfie Parker'),
+('P037', 'Ava Garcia'),
+('P038', 'Tariq Brown'),
+('P039', 'Jacob Taylor'),
+('P040', 'Muhammad Anderson'),
+('P041', 'Fatima Perez'),
+('P042', 'Violet Jones'),
+('P043', 'Logan Nelson'),
+('P044', 'Violet Turner'),
+('P045', 'Chloe Thompson'),
+('P046', 'Layla Smith'),
+('P047', 'Fatima Rivera'),
+('P048', 'Jacob Bell'),
+('P049', 'Zoe Richardson'),
+('P050', 'Poppy Cox'),
+('P051', 'Fiona Clarke'),
+('P052', 'Finn Bradley'),
+('P053', 'Fiona Bennett'),
+('P054', 'Firas Hassan'),
+('P055', 'Fiona Morgan');
 
 
 INSERT INTO cruise_details (cruise_no, cruise_name) VALUES # Inserts Values Into cruise_details Table
@@ -333,72 +333,72 @@ INSERT INTO excursion_details (excursion_no, excursion_leader_id, port_id, excur
 ('C001', 'L012', 9, 'Barcelona City Highlights', 110.00);
 
 
-INSERT INTO order_details (order_id, passenger_id, cruise_no) VALUES # Inserts Values Into order_details Table
-('ORD001', 'P017', 1033),
-('ORD002', 'P032', 1017),
-('ORD003', 'P004', 1006),
-('ORD004', 'P041', 1028),
-('ORD005', 'P018', 1003),
-('ORD006', 'P001', 1022),
-('ORD007', 'P050', 1009),
-('ORD008', 'P041', 1017),
-('ORD009', 'P011', 1048),
-('ORD010', 'P029', 1036),
-('ORD011', 'P046', 1028),
-('ORD012', 'P036', 1001),
-('ORD013', 'P008', 1005),
-('ORD014', 'P045', 1010),
-('ORD015', 'P035', 1003),
-('ORD016', 'P024', 1038),
-('ORD017', 'P036', 1010),
-('ORD018', 'P028', 1009),
-('ORD019', 'P003', 1020),
-('ORD020', 'P024', 1003),
-('ORD021', 'P023', 1014),
-('ORD022', 'P044', 1016),
-('ORD023', 'P043', 1007),
-('ORD024', 'P023', 1050),
-('ORD025', 'P036', 1027),
-('ORD026', 'P040', 1048),
-('ORD027', 'P010', 1016),
-('ORD028', 'P011', 1012),
-('ORD029', 'P027', 1002),
-('ORD030', 'P012', 1048),
-('ORD031', 'P022', 1027),
-('ORD032', 'P043', 1048),
-('ORD033', 'P016', 1018),
-('ORD034', 'P011', 1045),
-('ORD035', 'P007', 1025),
-('ORD036', 'P003', 1031),
-('ORD037', 'P015', 1013),
-('ORD038', 'P030', 1023),
-('ORD039', 'P020', 1015),
-('ORD040', 'P015', 1002),
-('ORD041', 'P043', 1013),
-('ORD042', 'P026', 1022),
-('ORD043', 'P018', 1005),
-('ORD044', 'P050', 1018),
-('ORD045', 'P023', 1042),
-('ORD046', 'P033', 1026),
-('ORD047', 'P044', 1035),
-('ORD048', 'P022', 1002),
-('ORD049', 'P008', 1017),
-('ORD050', 'P012', 1038),
-('ORD051', 'P001', 1001),
-('ORD052', 'P002', 1002),
-('ORD053', 'P003', 1003),
-('ORD054', 'P004', 1004),
-('ORD055', 'P005', 1005),
-('ORD056', 'P006', 1006),
-('ORD057', 'P007', 1007),
-('ORD058', 'P008', 1008),
-('ORD059', 'P009', 1009),
-('ORD060', 'P010', 1010),
-('ORD061', 'P051', 1011),
-('ORD062', 'P052', 1012),
-('ORD063', 'P053', 1013),
-('ORD064', 'P054', 1014),
-('ORD065', 'P055', 1015);
+INSERT INTO order_details (order_id, passenger_id, cruise_no, cabin) VALUES
+('ORD001', 'P017', 1033, '1434'),
+('ORD002', 'P032', 1017, '2674'),
+('ORD003', 'P004', 1006, '5012'),
+('ORD004', 'P041', 1028, '9785'),
+('ORD005', 'P018', 1003, '4257'),
+('ORD006', 'P001', 1022, '2824'),
+('ORD007', 'P050', 1009, '4733'),
+('ORD008', 'P041', 1017, '9785'),
+('ORD009', 'P011', 1048, '1520'),
+('ORD010', 'P029', 1036, '3547'),
+('ORD011', 'P046', 1028, '6925'),
+('ORD012', 'P036', 1001, '6881'),
+('ORD013', 'P008', 1005, '9935'),
+('ORD014', 'P045', 1010, '5803'),
+('ORD015', 'P035', 1003, '2584'),
+('ORD016', 'P024', 1038, '1106'),
+('ORD017', 'P036', 1010, '6881'),
+('ORD018', 'P028', 1009, '5552'),
+('ORD019', 'P003', 1020, '5506'),
+('ORD020', 'P024', 1003, '1106'),
+('ORD021', 'P023', 1014, '5557'),
+('ORD022', 'P044', 1016, '2291'),
+('ORD023', 'P043', 1007, '7201'),
+('ORD024', 'P023', 1050, '5557'),
+('ORD025', 'P036', 1027, '6881'),
+('ORD026', 'P040', 1048, '8527'),
+('ORD027', 'P010', 1016, '7912'),
+('ORD028', 'P011', 1012, '1520'),
+('ORD029', 'P027', 1002, '6574'),
+('ORD030', 'P012', 1048, '1488'),
+('ORD031', 'P022', 1027, '8359'),
+('ORD032', 'P043', 1048, '7201'),
+('ORD033', 'P016', 1018, '9279'),
+('ORD034', 'P011', 1045, '1520'),
+('ORD035', 'P007', 1025, '2679'),
+('ORD036', 'P003', 1031, '5506'),
+('ORD037', 'P015', 1013, '4811'),
+('ORD038', 'P030', 1023, '4527'),
+('ORD039', 'P020', 1015, '7873'),
+('ORD040', 'P015', 1002, '4811'),
+('ORD041', 'P043', 1013, '7201'),
+('ORD042', 'P026', 1022, '7924'),
+('ORD043', 'P018', 1005, '4257'),
+('ORD044', 'P050', 1018, '4733'),
+('ORD045', 'P023', 1042, '5557'),
+('ORD046', 'P033', 1026, '2519'),
+('ORD047', 'P044', 1035, '2291'),
+('ORD048', 'P022', 1002, '8359'),
+('ORD049', 'P008', 1017, '9935'),
+('ORD050', 'P012', 1038, '1488'),
+('ORD051', 'P001', 1001, '2824'),
+('ORD052', 'P002', 1002, '1409'),
+('ORD053', 'P003', 1003, '5506'),
+('ORD054', 'P004', 1004, '5012'),
+('ORD055', 'P005', 1005, '4657'),
+('ORD056', 'P006', 1006, '3286'),
+('ORD057', 'P051', 1007, '3301'),
+('ORD058', 'P052', 1008, '4402'),
+('ORD059', 'P053', 1009, '5503'),
+('ORD060', 'P054', 1010, '6604'),
+('ORD061', 'P055', 1011, '7705'),
+('ORD062', 'P052', 1012, '4402'),
+('ORD063', 'P053', 1013, '5503'),
+('ORD064', 'P054', 1014, '6604'),
+('ORD065', 'P055', 1015, '7705');
 
 
 INSERT INTO order_amount_details (order_id, excursion_no, qty) VALUES # Inserts Values Into order_amount_details Table
@@ -489,12 +489,12 @@ WHERE port_id = (SELECT port_id FROM port_details WHERE port = 'Copenhagen');
 
 -- ii) Create a list that shows the orderID, passenger number, and passenger name and passenger cabin.
 -- The headings for the columns should be “Order ID”, “Passenger ID”, “Name of Passenger” and “Cabin”.
-SELECT o.order_id AS "Order ID", p.passenger_id AS "Passenger ID", p.passenger_name AS "Name of Passenger", p.cabin AS "Cabin"
+SELECT o.order_id AS "Order ID", p.passenger_id AS "Passenger ID", p.passenger_name AS "Name of Passenger", o.cabin AS "Cabin"
 FROM order_details AS o
 JOIN passenger_details AS p ON o.passenger_id = p.passenger_id;
 
 -- iii) Display the passenger details for all passengers going on an excursion in St Petersburg or Oslo.
-SELECT DISTINCT p.passenger_id, p.passenger_name, p.cabin
+SELECT DISTINCT p.passenger_id, p.passenger_name
 FROM passenger_details AS p
 JOIN order_details AS o ON p.passenger_id = o.passenger_id
 JOIN order_amount_details AS oa ON o.order_id = oa.order_id
@@ -522,9 +522,9 @@ GROUP BY c.cruise_name;
 -- vi) Display the passenger details, excursion details for passengers
 -- whose name starts with the first two letters of your first name
 -- but do not include the last 2 letters of your last name.
-SELECT DISTINCT p.passenger_name, p.passenger_id, p.cabin, e.excursion_no, e.excursion_leader_id, e.port_id, e.excursion, e.price_per_excursion
+SELECT DISTINCT p.passenger_name, p.passenger_id, e.excursion_no, e.excursion_leader_id, e.port_id, e.excursion, e.price_per_excursion
 FROM passenger_details AS p
 JOIN order_details AS o ON p.passenger_id = o.passenger_id
 JOIN order_amount_details AS oa ON o.order_id = oa.order_id
 JOIN excursion_details AS e ON oa.excursion_no = e.excursion_no
-WHERE p.passenger_name LIKE 'Fi%' AND p.passenger_name NOT LIKE 'ti%';
+WHERE p.passenger_name LIKE 'Fi%' AND p.passenger_name NOT LIKE '%ti';
